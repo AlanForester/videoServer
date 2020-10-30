@@ -72,6 +72,7 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
 	isAutoLayout = false;
 	hasVideoDevices: boolean;
 	hasAudioDevices: boolean;
+	roomName:string;
 	private log: ILogger;
 	private oVUsersSubscription: Subscription;
 	private remoteUsersSubscription: Subscription;
@@ -94,7 +95,7 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
 	) {
 		this.log = this.loggerSrv.get('VideoRoomComponent');
 		this.externalConfig = new ExternalConfigModel()
-		this.externalConfig.setTheme(Theme.DARK)
+		this.externalConfig.setTheme(Theme.LIGHT)
 		this.externalConfig.setOvServerUrl("https://jitsi.somedata.online")
 		this.externalConfig.setOvSecret("842655")
 	}
@@ -125,7 +126,7 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
             if (params != {}) {
 				this.externalConfig.setSessionName(params['room'])	 
             }
-        })
+        })		
 	}
 
 	ngOnDestroy() {

@@ -68,7 +68,8 @@
         "pack:openvidu-angular": "cd dist/openvidu-angular && npm pack",
         "e2e": "ng e2e",
         "lint": "ng lint",
-        "test": "ng test openvidu-call --watch=false --code-coverage"
+        "test": "ng test openvidu-call --watch=false --code-coverage",
+        "deploy": "npm run build-prod && "
     },
-    "version": "2.15.0"
+    "version": "npm uild-prod"
 }

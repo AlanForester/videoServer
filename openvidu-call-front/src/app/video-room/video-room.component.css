@@ -2,6 +2,7 @@
   min-width: 400px;
   background-color: #494949;
   height: 100%;
+  max-width: 100%;
 }
 
 #localUser {
@@ -926,6 +927,6 @@
 @media only screen and (max-width: 600px) {
   #videoRoomNavBar {
     width: 100%;
-    /* position: fixed; */
+    position: fixed; 
   }
 }
