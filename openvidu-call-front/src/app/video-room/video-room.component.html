@@ -34,21 +34,26 @@
 					[style.bottom]="'0px'"
 					[class.boundsLight]="lightTheme"
 				>
+				<div *ngIf="remoteUser == null" class="no_interlocutor">
+					The interlocutor is not connected
+				</div>
+				
 				<div
-				class="OV_small T_publisher custom-class"
+				class="OV_small OT_publisher custom-class"
 				id="localUser"
+				(click)="(localUser)?toggleDisplay():false"
 			>
 				<!-- Only webcam video will be shown if webcamera is available -->
 				<stream-component
 					[localDisplayActive]="false"
 					[user]="(!localDisplayShow)?localUser:remoteUser"
 					(nicknameClicked)="onNicknameUpdate($event)"
-					(click)="toggleDisplay()"
 				></stream-component>
 			</div>
 				<div
-				class="OT_root T_publisher custom-class"
+				class="OT_root OT_publisher custom-class"
 				id="remoteUsers"
+				(click)="(localUser)?toggleDisplay():false"
 			>
 				<stream-component
 					[localDisplayActive]="true"
