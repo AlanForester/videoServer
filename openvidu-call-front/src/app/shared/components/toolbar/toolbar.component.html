@@ -1,0 +1,63 @@
+<div fxFlex="70%" fxFlexOrder="2">
+		<div align="center" class="buttonsContainer">
+			<button
+				id="navMicrophoneButton"
+				mat-mini-fab 
+				(click)="toggleMicrophone()"
+				[disabled]="isConnectionLost"
+				*ngIf="hasAudioDevices && (ovSettings | hasAudio)"
+				vertical="bottom" horizontal="center" slot="fixed"
+				size="small" 
+				[color]="(!isWebcamAudioEnabled)?'warn':'prim'"
+			>
+				<mat-icon *ngIf="isWebcamAudioEnabled"  matTooltip="Mute your audio">mic</mat-icon>
+				<mat-icon *ngIf="!isWebcamAudioEnabled" matTooltip="Unmute your audio">mic_off</mat-icon>
+			</button>
+		
+			<button mat-mini-fab  color="warn" (click)="leaveSession()" id="navLeaveButton" *ngIf="ovSettings | hasExit">
+				<mat-icon size="small" color="danger" matTooltip="Leave the session">power_settings_new</mat-icon>
+			</button>
+			<!-- Camera button -->
+			<button
+				id="navCameraButton"
+				mat-mini-fab
+				(click)="toggleCamera()"
+				[disabled]="isConnectionLost"
+				*ngIf="!this.ovSettings || (hasVideoDevices && (this.ovSettings | hasVideo))"
+				[color]="(!isWebcamVideoEnabled)?'warn':'prim'"
+			>
+				<mat-icon *ngIf="isWebcamVideoEnabled" matTooltip="Mute your cam">videocam</mat-icon>
+				<mat-icon *ngIf="!isWebcamVideoEnabled" color="warn" matTooltip="Unmute your cam">videocam_off</mat-icon>
+			</button>
+
+			<!-- Screenshare button -->
+			<button
+				id="navScreenButton"
+				mat-icon-button
+				[disabled]="isConnectionLost"
+				*ngIf="ovSettings | hasScreenSharing"
+			>
+				<mat-icon *ngIf="!isScreenShareEnabled" matTooltip="Screen share" color="warn">stop_screen_share</mat-icon>
+				<mat-icon *ngIf="isScreenShareEnabled" matTooltip="Stop sharing">screen_share</mat-icon>
+			</button>
+
+			<!-- Fullscreen button -->
+			<button mat-icon-button (click)="toggleFullscreen()" [disabled]="isConnectionLost" *ngIf="ovSettings | hasFullscreen">
+				<mat-icon matTooltip="Fullscreen">{{ fullscreenIcon }}</mat-icon>
+			</button>
+
+			<!-- Automatic / grid layout button -->
+			<button
+				mat-icon-button
+				(click)="toggleSpeakerLayout()"
+				[disabled]="isConnectionLost"
+				*ngIf="ovSettings | hasLayoutSpeaking"
+			>
+				<mat-icon matTooltip="Enable speaker layout" color="warn" *ngIf="!isAutoLayout">videocam</mat-icon>
+				<mat-icon matTooltip="Disable speaker layout" *ngIf="isAutoLayout">videocam</mat-icon>
+			</button>
+
+			<!-- Leave seassion button -->
+		</div>
+	</div>
+	
