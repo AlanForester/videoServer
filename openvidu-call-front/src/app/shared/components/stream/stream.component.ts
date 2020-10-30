@@ -67,8 +67,10 @@ export class StreamComponent implements OnInit, OnDestroy {
 
 	@Input()
 	set user(user: UserModel) {
-		this._user = user;
-		this.nicknameFormControl = new FormControl(this._user.getNickname());
+		if (user != null) {
+			this._user = user;
+			this.nicknameFormControl = new FormControl(this._user.getNickname());
+		}
 	}
 
 	@ViewChild('nicknameInput')
