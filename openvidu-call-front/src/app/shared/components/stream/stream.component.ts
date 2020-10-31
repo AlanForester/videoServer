@@ -27,7 +27,7 @@ export class StreamComponent implements OnInit, OnDestroy {
 	nicknameFormControl: FormControl;
 	matcher: NicknameMatcher;
 
-	_user: UserModel;
+	_user: UserModel; 
 
 	_localDisplayActive: boolean;
 	@Output() nicknameClicked = new EventEmitter<any>();

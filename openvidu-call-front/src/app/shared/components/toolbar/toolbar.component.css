@@ -19,13 +19,23 @@ width: 0;
   left: 50%;
   bottom: 20px;
   transform: translate(-50%, -50%);
-  margin: 0 auto;
+  line-break: strict;
 }
 
 .buttonsContainer button {
-  margin: 22px 0px 0px 50px;
+  width: auto; 
 }
 
+.navCameraButton {
+  width: 40px; 
+}
+
+.buttonsContainer button {
+  margin: 10px;
+}
+.buttonsContainer .mat-mini-fab {
+  min-width: 40px;
+}
 .headerLight {
   color: #706969 !important;
   background-color: #eeeeee !important;

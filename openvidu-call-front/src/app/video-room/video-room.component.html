@@ -29,37 +29,44 @@
 			<mat-sidenav-content class="sidenav-main">
 				<div
 					id="layout"
-					class="bounds"
 					[style.top]="'0px'"
 					[style.bottom]="'0px'"
 					[class.boundsLight]="lightTheme"
 				>
-				<div *ngIf="remoteUser == null" class="no_interlocutor">
-					The interlocutor is not connected
-				</div>
+				
+					<div *ngIf="remoteUser == null" class="no_interlocutor precontent">
+						<img src="assets/images/1.png" />
+
+						<div> Ждите подтверждения консультанта</div>
+
+						<div class="precontent-small">
+							Это может занять несколько минут
+						</div>
+					</div>
 				
 				<div
-				class="OV_small OT_publisher custom-class"
-				id="localUser"
-				(click)="(localUser)?toggleDisplay():false"
-			>
-				<!-- Only webcam video will be shown if webcamera is available -->
-				<stream-component
-					[localDisplayActive]="false"
-					[user]="(!localDisplayShow)?localUser:remoteUser"
-					(nicknameClicked)="onNicknameUpdate($event)"
-				></stream-component>
-			</div>
+					class="OV_small OT_publisher custom-class"
+					id="localUser"
+					(click)="(localUser)?toggleDisplay():false"
+				>
+					<!-- Only webcam video will be shown if webcamera is available -->
+					<stream-component
+						[localDisplayActive]="false"
+						[user]="(!localDisplayShow)?localUser:remoteUser"
+						(nicknameClicked)="onNicknameUpdate($event)"
+					></stream-component>
+				</div>
+
 				<div
-				class="OT_root OT_publisher custom-class"
-				id="remoteUsers"
-				(click)="(localUser)?toggleDisplay():false"
-			>
+					class="OT_root OT_publisher custom-class"
+					id="remoteUsers"
+					(click)="(localUser)?toggleDisplay():false"
+				>
 				<stream-component
 					[localDisplayActive]="true"
 					[user]="(localDisplayShow)?localUser:remoteUser"
 				></stream-component>
-			</div>
+				</div>
 				</div>
 			</mat-sidenav-content>
 		</mat-sidenav-container>

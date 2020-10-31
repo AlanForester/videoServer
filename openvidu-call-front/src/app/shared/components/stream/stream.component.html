@@ -6,7 +6,7 @@
 	[class.local]="!this._localDisplayActive"
 	(dblclick)="replaceScreenTrack()"
 >
-	<div class="nickname" [class.local]="!this._localDisplayActive" [class.fullscreen]="isFullscreen">
+	<div *ngIf="_localDisplayActive" class="nickname" [class.local]="!this._localDisplayActive" [class.fullscreen]="isFullscreen">
 		<div (click)="toggleNicknameForm()" class="nicknameContainer" [class.local]="!this._localDisplayActive" selected *ngIf="!toggleNickname">
 			<span id="nickname">{{ this._user.nickname }}</span>
 			<span *ngIf="_user.local || (_user.streamManager && !_user.streamManager?.remote)"> (edit)</span>

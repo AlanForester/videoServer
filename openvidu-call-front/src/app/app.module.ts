@@ -141,11 +141,6 @@ import { RouteReuseStrategy } from '@angular/router';
 	bootstrap: [AppComponent]
 })
 export class AppModule {
-	constructor(private injector: Injector) {
-		const strategyFactory = new ElementZoneStrategyFactory(WebComponentComponent, this.injector);
-		const element = createCustomElement(WebComponentComponent, { injector: this.injector, strategyFactory });
-		customElements.define('openvidu-webcomponent', element);
-	}
-
+	
 	ngDoBootstrap() {}
 }

@@ -14,9 +14,6 @@
 				<mat-icon *ngIf="!isWebcamAudioEnabled" matTooltip="Unmute your audio">mic_off</mat-icon>
 			</button>
 		
-			<button mat-mini-fab  color="warn" (click)="leaveSession()" id="navLeaveButton" *ngIf="ovSettings | hasExit">
-				<mat-icon size="small" color="danger" matTooltip="Leave the session">power_settings_new</mat-icon>
-			</button>
 			<!-- Camera button -->
 			<button
 				id="navCameraButton"
@@ -27,7 +24,11 @@
 				[color]="(!isWebcamVideoEnabled)?'warn':'prim'"
 			>
 				<mat-icon *ngIf="isWebcamVideoEnabled" matTooltip="Mute your cam">videocam</mat-icon>
-				<mat-icon *ngIf="!isWebcamVideoEnabled" color="warn" matTooltip="Unmute your cam">videocam_off</mat-icon>
+				<mat-icon *ngIf="!isWebcamVideoEnabled" matTooltip="Unmute your cam">videocam_off</mat-icon>
+			</button>
+
+			<button mat-mini-fab color="warn" (click)="leaveSession()" id="navLeaveButton" *ngIf="ovSettings | hasExit">
+				<mat-icon size="small" color="danger" matTooltip="Leave the session">power_settings_new</mat-icon>
 			</button>
 
 			<!-- Screenshare button -->
