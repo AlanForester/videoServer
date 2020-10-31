@@ -115,9 +115,9 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
 		this.localUsersService.initialize();
 		this.openViduWebRTCService.initialize();
 
-		let nickname = this.storageSrv.get(Storage.USER_NICKNAME);
-		if (nickname == "") nickname = this.utilsSrv.generateNickname();
-		this.externalConfig.setNickname(nickname)
+		// let nickname = this.storageSrv.get(Storage.USER_NICKNAME);
+		// if (nickname == "") nickname = this.utilsSrv.generateNickname();
+		// this.externalConfig.setNickname(nickname)
 
 		this.lightTheme = this.externalConfig?.getTheme() === Theme.DARK;
 		this.ovSettings = this.externalConfig.getOvSettings();
