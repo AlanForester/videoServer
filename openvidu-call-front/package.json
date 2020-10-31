@@ -69,7 +69,7 @@
         "e2e": "ng e2e",
         "lint": "ng lint",
         "test": "ng test openvidu-call --watch=false --code-coverage",
-        "deploy": "npm run build-prod && rsync -av --exclude=node_modules  ./* root@jitsi.somedata.online:/opt/openvidu/www/app/"
+        "deploy": "npm run build-prod && rsync -av --exclude=node_modules  ./* root@jitsi.somedata.online:/opt/openvidu/www/app/openvidu-call-front/"
     },
     "version": "2.15.0"
 }
