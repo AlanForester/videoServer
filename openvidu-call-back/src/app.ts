@@ -2,6 +2,7 @@
 import * as express from 'express';
 import { SERVER_PORT, OPENVIDU_URL, OPENVIDU_SECRET, CALL_OPENVIDU_CERTTYPE } from './config';
 import {app as callController} from './controllers/CallController';
+import {appHook as hookontroller} from './controllers/HookController';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -11,6 +12,8 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 
+
+app.use('/hook', hookontroller);
 app.use('/call', callController);
 
 app.listen(SERVER_PORT, () => {

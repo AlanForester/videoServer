@@ -3,31 +3,17 @@ import * as express from '../../dist/node_modules/express';
 import { Request, Response } from '../../dist/node_modules/express';
 import { OpenViduService } from '../services/OpenViduService';
 import { OPENVIDU_URL, OPENVIDU_SECRET } from '../config';
-export const app = express.Router({
+export const appHook = express.Router({
     strict: true
 });
 
 const openviduService = new OpenViduService();
 
-app.post('/', async (req: Request, res: Response) => {
-	let sessionId: string = req.body.sessionId;
-	console.log('Session ID received', req.body);
-	try {
-		const sessionResponse = await openviduService.createSession(sessionId, OPENVIDU_URL, OPENVIDU_SECRET);
-		sessionId =sessionResponse.id;
-	} catch (error) {
-		const statusCode = error.response?.status;
-		if (statusCode && statusCode !== 409){
-			handleError(error, res);
-			return;
-		}
-	}
-	try {
-		const response = await openviduService.createToken(sessionId, OPENVIDU_URL, OPENVIDU_SECRET);
-		res.status(200).send(JSON.stringify(response.token));
-	} catch (error) {
-		handleError(error, res);
-	}
+
+appHook.post('/', async (req: Request, res: Response) => {
+	let body: string = req.body;
+	console.log('webhook received', req.body);
+	
 });
 
 function handleError(error: any, res: Response){

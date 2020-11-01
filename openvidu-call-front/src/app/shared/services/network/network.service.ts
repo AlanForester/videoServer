@@ -15,13 +15,23 @@ export class NetworkService {
 
 	constructor(private http: HttpClient, private loggerSrv: LoggerService) {
 		this.log = this.loggerSrv.get('NetworkService');
-		this.baseHref =  '/' + (!!window.location.pathname.split('/')[1] ? window.location.pathname.split('/')[1] + '/' : '');
+		this.baseHref = '/' + (!!window.location.pathname.split('/')[1] ? window.location.pathname.split('/')[1] + '/' : '');
 	}
 
 	async getToken(sessionId: string, openviduServerUrl: string, openviduSecret: string): Promise<string> {
+		if (!!openviduServerUrl && !!openviduSecret) {
 			const _sessionId = await this.createSession(sessionId, openviduServerUrl, openviduSecret);
 			return await this.createToken(_sessionId, openviduServerUrl, openviduSecret);
-		
+		}
+		try {
+			this.log.d('Getting token from backend');
+			return await this.http.post<any>(this.baseHref + 'call', {sessionId}).toPromise();
+		} catch (error) {
+			if (error.status === 404) {
+				throw {status: error.status, message: 'Cannot connect with backend. ' + error.url + ' not found'};
+			}
+			throw error;
+		}
 	}
 
 	createSession(sessionId: string, openviduServerUrl: string, openviduSecret: string): Promise<string> {
