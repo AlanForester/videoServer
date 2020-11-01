@@ -59,7 +59,7 @@ export class NetworkService {
 				.subscribe(response => {
 					resolve(response.id);
 				});
-		});
+		}); 
 	}
 
 	createToken(sessionId: string, openviduServerUrl: string, openviduSecret: string): Promise<string> {

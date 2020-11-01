@@ -28,7 +28,7 @@ export class TokenService {
 	}
 
 	getSessionId(): string {
-		return this.sessionId;
+		return this.sessionId; 
 	}
 
 	async initTokens(externalConfig: ExternalConfigModel) {
@@ -49,7 +49,7 @@ export class TokenService {
 	}
 
 	getWebcamToken(): string {
-		return this.webcamToken;
+		return this.webcamToken; 
 	}
 
 	getScreenToken(): string {
