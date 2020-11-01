@@ -57,8 +57,8 @@
     "private": true,
     "scripts": {
         "start": "ng serve --host 10.0.1.50 --ssl --ssl-key cert.key --ssl-cert cert.crt",
-        "build": "./node_modules/@angular/cli/bin/ng build && npm run copy:backend",
-        "build-prod": "func() { ./node_modules/@angular/cli/bin/ng build --prod --base-href=\"${1:-/}\" && npm run copy:backend-prod; }; func",
+        "build": "../node_modules/@angular/cli/bin/ng build && npm run copy:backend",
+        "build-prod": "func() { ../node_modules/@angular/cli/bin/ng build --prod --base-href=\"${1:-/}\" && npm run copy:backend-prod; }; func",
         "build:openvidu-angular": "node openvidu-angular-build.js && ./node_modules/@angular/cli/bin/ng build openvidu-angular --prod",
         "build:openvidu-webcomponent": "node ./openvidu-webcomponent-prepare.js && ./node_modules/@angular/cli/bin/ng build --prod --output-hashing none && node ./openvidu-webcomponent-build.js",
         "build-win:openvidu-webcomponent": "node .\\openvidu-webcomponent-prepare.js && node .\\node_modules\\@angular\\cli\\bin\\ng build --prod --output-hashing none && node .\\openvidu-webcomponent-build.js",
@@ -69,7 +69,7 @@
         "e2e": "ng e2e",
         "lint": "ng lint",
         "test": "ng test openvidu-call --watch=false --code-coverage",
-        "deploy": "npm run build-prod && rsync -av --exclude=node_modules  ./* root@jitsi.somedata.online:/opt/openvidu/www/app/openvidu-call-front/"
+        "deploy": "rsync -av --exclude=node_modules dist/openvidu-call/ root@jitsi.somedata.online:/opt/openvidu/dist/public"
     },
     "version": "2.15.0"
 }

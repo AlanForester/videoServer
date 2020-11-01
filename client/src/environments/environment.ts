@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  openvidu_url: 'https://jitsi.somedata.online',
-  openvidu_secret: '842655'
+  openvidu_url: '',
+  openvidu_secret: ''
 };
 
 /*

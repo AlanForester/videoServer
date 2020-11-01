@@ -1,6 +1,6 @@
 
-import * as express from '../../dist/node_modules/express';
-import { Request, Response } from '../../dist/node_modules/express';
+import * as express from 'express';
+import { Request, Response } from 'express';
 import { OpenViduService } from '../services/OpenViduService';
 import { OPENVIDU_URL, OPENVIDU_SECRET } from '../config';
 export const app = express.Router({

@@ -1,4 +1,4 @@
-import { OvSettings } from '../types/ov-settings';
+import { OvSettings } from './ov-settings';
 
 export interface ISessionConfig {
 	sessionName: string;
