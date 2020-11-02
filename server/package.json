@@ -49,7 +49,7 @@
     },
     "scripts": {
         "build": "webpack",
-        "start": "cross-env CALL_OPENVIDU_CERTTYPE=selfsigned nodemon src/app.ts",
+        "start": "cross-env CALL_OPENVIDU_CERTTYPE=selfsigned nodemon src/app.ts --unhandled-rejections=strict",
         "deploy": "rsync -av --exclude=node_modules dist/* root@jitsi.somedata.online:/opt/openvidu/dist",
         "release": "npm run build && npm run deploy",
         "test": "jest"

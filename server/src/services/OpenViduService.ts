@@ -4,6 +4,7 @@ import { RecordingMode, OpenVidu, Recording,
     SessionProperties, TokenOptions, OpenViduRole,
     } from 'openvidu-node-client';
 import { OPENVIDU_URL, OPENVIDU_SECRET } from '../config';
+import { recSess } from 'src/controllers/RecordingsController';
 
 export class OpenViduService {
 
@@ -24,7 +25,9 @@ export class OpenViduService {
     public async getRecording(sessionId: string): Promise<any> {
         console.log("Get recording to ", sessionId);
 
-        return await this.api.getRecording(sessionId);
+        return await this.api.getRecording(sessionId).catch(err => {
+            return err
+        });
     }
 
     public async listRecordings(): Promise<any> {

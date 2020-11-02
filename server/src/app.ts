@@ -1,8 +1,8 @@
 
 import * as express from 'express';
 import { SERVER_PORT, OPENVIDU_URL, OPENVIDU_SECRET, CALL_OPENVIDU_CERTTYPE } from './config';
-import {app as callController} from './controllers/CallController';
 import {appHook as hookontroller} from './controllers/HookController';
+import {app as callController} from './controllers/CallController';
 import {appSess as sessController} from './controllers/SessionsController';
 import {recSess as recController} from './controllers/RecordingsController';
 import * as dotenv from 'dotenv';
