@@ -1,16 +1,13 @@
-import { Publisher } from 'openvidu-browser';
-import { Output } from '@angular/core';
 import { HttpClientService } from './HttpClientService';
 import { RecordingMode, OpenVidu, Recording, 
     RecordingProperties, RecordingLayout, Session, 
     SessionProperties, TokenOptions, OpenViduRole,
     } from 'openvidu-node-client';
 import { OPENVIDU_URL, OPENVIDU_SECRET } from '../config';
-import { SessionOptions } from 'http2';
 
 export class OpenViduService {
 
-    private : HttpClientService;
+    private httpClientService: HttpClientService;
     private api: OpenVidu;
 
 	constructor(){
@@ -36,16 +33,15 @@ export class OpenViduService {
         };
         return await this.api.createSession(properties);
     }
-    
-    public async getSession(sessionId: string): Promise<Session> {
-        console.log("Get session to ", sessionId);
-        var properties:SessionProperties = {
-            customSessionId: sessionId, 
-            recordingMode: RecordingMode.MANUAL,
-            defaultOutputMode: Recording.OutputMode.INDIVIDUAL
-        };
-        return await this.api.getSession (properties);
+
+    public async getSession(sessionId: string,) {
+        const url = OPENVIDU_URL + '/api/sessions';
+        console.log("Requesting session to ", url);
+        const body: string = JSON.stringify({ customSessionId: sessionId});
+
+        return await this.httpClientService.post(body, url, OPENVIDU_SECRET);
 	}
+
 
 	public async createToken(session: Session): Promise<string> {
         console.log("New token to ", session.sessionId);
