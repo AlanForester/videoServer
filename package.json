@@ -9,7 +9,8 @@
         "btoa": "1.2.1",
         "dotenv": "8.2.0",
         "express": "4.17.1",
-        "openvidu-call": "file:client"
+        "openvidu-call": "file:client",
+        "openvidu-node-client": "^2.15.0"
     },
     "description": "OpenVidu Call Server",
     "devDependencies": {
