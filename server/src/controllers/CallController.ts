@@ -1,3 +1,4 @@
+import { Params } from '@angular/router';
 import { Session } from 'openvidu-browser';
 import * as express from 'express';
 import { Request, Response } from 'express';
@@ -9,13 +10,15 @@ export const app = express.Router({
 
 const openviduService = new OpenViduService();
 var session: any
+
 app.post('/', async (req: Request, res: Response) => {
 	let sessionId: string = req.body.sessionId;
 	console.log('Session ID received', req.body);
 	try {
 
-		session = await openviduService.createSession(sessionId);
+		session = await openviduService.createSession(sessionId);		
 		sessionId = session.sessionId;
+
 	} catch (error) {
 		const statusCode = error.response?.status;
 		if (statusCode && statusCode !== 409){
