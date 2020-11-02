@@ -34,7 +34,17 @@ export class OpenViduService {
             recordingMode: RecordingMode.MANUAL,
             defaultOutputMode: Recording.OutputMode.INDIVIDUAL
         };
-        return await this.api.createSession (properties);
+        return await this.api.createSession(properties);
+    }
+    
+    public async getSession(sessionId: string): Promise<Session> {
+        console.log("Get session to ", sessionId);
+        var properties:SessionProperties = {
+            customSessionId: sessionId, 
+            recordingMode: RecordingMode.MANUAL,
+            defaultOutputMode: Recording.OutputMode.INDIVIDUAL
+        };
+        return await this.api.getSession (properties);
 	}
 
 	public async createToken(session: Session): Promise<string> {

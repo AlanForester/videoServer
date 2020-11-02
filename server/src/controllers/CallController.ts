@@ -1,4 +1,4 @@
-
+import { Session } from 'openvidu-browser';
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { OpenViduService } from '../services/OpenViduService';
@@ -8,13 +8,14 @@ export const app = express.Router({
 });
 
 const openviduService = new OpenViduService();
-
+var session: any
 app.post('/', async (req: Request, res: Response) => {
 	let sessionId: string = req.body.sessionId;
 	console.log('Session ID received', req.body);
 	try {
-		const sessionResponse = await openviduService.createSession(sessionId, OPENVIDU_URL, OPENVIDU_SECRET);
-		sessionId =sessionResponse.id;
+
+		session = await openviduService.createSession(sessionId);
+		sessionId = session.sessionId;
 	} catch (error) {
 		const statusCode = error.response?.status;
 		if (statusCode && statusCode !== 409){
@@ -23,8 +24,8 @@ app.post('/', async (req: Request, res: Response) => {
 		}
 	}
 	try {
-		const response = await openviduService.createToken(sessionId, OPENVIDU_URL, OPENVIDU_SECRET);
-		res.status(200).send(JSON.stringify(response.token));
+		const response = await openviduService.createToken(session);
+		res.status(200).send(JSON.stringify(response));
 	} catch (error) {
 		handleError(error, res);
 	}

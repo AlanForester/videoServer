@@ -9,7 +9,8 @@ import {
 	StreamPropertyChangedEvent,
 	SessionDisconnectedEvent,
 	PublisherSpeakingEvent,
-	ConnectionEvent
+	ConnectionEvent,
+	Filter
 } from 'openvidu-browser';
 import { UserModel } from '../shared/models/user-model';
 import { ChatComponent } from '../shared/components/chat/chat.component';
@@ -523,23 +524,15 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
 		const audioSource = this.hasAudioDevices ? undefined : null;
 		const willThereBeWebcam = this.localUsersService.isWebCamEnabled() && this.localUsersService.hasWebcamVideoActive();
 		const hasAudio = willThereBeWebcam ? false : this.hasAudioDevices && this.localUsersService.hasWebcamAudioActive();
-		const filter = {
-			type: "gdkpixbufoverlay",
-			options: {
-				location: "/images/img.png",
+		const filter = new Filter("gdkpixbufoverlay",{
+				location: "/assets/logo.png",
 				offsetX: 10,
 				offsetY: 10, 
 				OverlayHeight: 200,
 				OverlayWidth:200,
-			}
-		}
+		})
 		const properties = this.openViduWebRTCService.createPublisherProperties(videoSource, audioSource, true, hasAudio, false);
-		properties.filter = {
-			type: "GStreamerFilter",
-			options: {
-				command: "videoflip method=vertical-flip"
-			}
-		}
+		properties.filter = filter
 		try {
 			return this.openViduWebRTCService.initPublisher(undefined, properties);
 		} catch (error) {
