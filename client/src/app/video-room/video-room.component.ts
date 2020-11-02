@@ -523,8 +523,23 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
 		const audioSource = this.hasAudioDevices ? undefined : null;
 		const willThereBeWebcam = this.localUsersService.isWebCamEnabled() && this.localUsersService.hasWebcamVideoActive();
 		const hasAudio = willThereBeWebcam ? false : this.hasAudioDevices && this.localUsersService.hasWebcamAudioActive();
+		const filter = {
+			type: "gdkpixbufoverlay",
+			options: {
+				location: "/images/img.png",
+				offsetX: 10,
+				offsetY: 10, 
+				OverlayHeight: 200,
+				OverlayWidth:200,
+			}
+		}
 		const properties = this.openViduWebRTCService.createPublisherProperties(videoSource, audioSource, true, hasAudio, false);
-
+		properties.filter = {
+			type: "GStreamerFilter",
+			options: {
+				command: "videoflip method=vertical-flip"
+			}
+		}
 		try {
 			return this.openViduWebRTCService.initPublisher(undefined, properties);
 		} catch (error) {
