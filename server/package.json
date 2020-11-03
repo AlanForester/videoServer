@@ -6,8 +6,9 @@
     "dependencies": {
         "axios": "0.20.0",
         "btoa": "1.2.1",
-        "dotenv": "8.2.0",
-        "express": "4.17.1"
+        "dotenv": "^8.2.0",
+        "express": "4.17.1",
+        "openvidu-node-client": "^2.15.0"
     },
     "description": "OpenVidu Call Server",
     "devDependencies": {
@@ -17,7 +18,7 @@
         "@types/node": "14.11.2",
         "concurrently": "5.3.0",
         "cross-env": "7.0.2",
-        "dotenv-webpack": "1.7.0",
+        "dotenv-webpack": "^1.7.0",
         "jest": "26.4.2",
         "nodemon": "2.0.3",
         "supertest": "4.0.2",
