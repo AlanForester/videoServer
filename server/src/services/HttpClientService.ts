@@ -22,7 +22,11 @@ export class HttpClientService {
 		};
 
 		try {
-			const response = await axios.get<any>(OPENVIDU_URL + url, this.options);
+			const response:any = await axios.get<any>(OPENVIDU_URL + url, this.options)
+			.catch((errror) => {
+				console.log("error ", errror)
+				  });
+				return response.data;
 			return response.data;
 		} catch (error) {
 			throw error;
@@ -42,7 +46,10 @@ export class HttpClientService {
 		};
 
 		try {
-			const response = await axios.post<any>(OPENVIDU_URL + url, body, this.options);
+			const response:any = await axios.post<any>(OPENVIDU_URL + url, body, this.options)
+			.catch((errror) => {
+			console.log("error ", errror)
+			  });
 			return response.data;
 		} catch (error) {
 			throw error;

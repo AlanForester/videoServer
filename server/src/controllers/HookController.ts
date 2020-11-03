@@ -14,12 +14,13 @@ var isec = {};
 
 appHook.post('/', async (req: Request, res: Response) => {
 	let body: any = req.body;
-	console.log('HOOK:  ', body);
+	console.log('HOOK:  ',  body.sessionId, body.event);
 	if (body.event == "participantJoined") {
 		const sessionId = body.sessionId
 		const session: any = await openviduService.getSession(sessionId)
 		const countConnections = session.connections.numberOfElements
-		if (countConnections >= 2 && !!!isec[sessionId]) {
+		console.log("connections: ", countConnections)
+		if (countConnections >= 2) {
 			openviduService.startRecording(session.sessionId)
 			isec[sessionId] = true 
 		}
@@ -28,10 +29,10 @@ appHook.post('/', async (req: Request, res: Response) => {
 		const sessionId = body.sessionId
 		const session: any = await openviduService.getSession(sessionId)
 		const countConnections = session.connections.numberOfElements
-		if (countConnections  < 2 && !!isec[sessionId]) {
+		if (countConnections  < 2) {
 			openviduService.stopRecording(session.sessionId)
 			delete(isec[sessionId])
 		}
 	}
-	res.status(200).send(JSON.stringify({"status": body}));
+	res.status(200).send(JSON.stringify({"status": isec}));
 });
