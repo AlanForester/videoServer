@@ -348,7 +348,8 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
 	private async connectToSession(): Promise<void> {
 		try {
 			// Initialize tokens from externalConfig or create new ones
-			await this.tokenService.initTokens(this.externalConfig);
+			this.tokenService.initTokens(this.externalConfig);
+			console.log(this.tokenService)
 		} catch (error) {
 			this.log.e('There was an error initializing the token:', error.status, error.message);
 			this._error.emit({ error: error.error, messgae: error.message, code: error.code, status: error.status });
@@ -375,6 +376,7 @@ export class VideoRoomComponent implements OnInit, OnDestroy {
 
 	private async connectScreenSession() {
 		try {
+		
 			await this.openViduWebRTCService.connectScreenSession(this.tokenService.getScreenToken());
 		} catch (error) {
 			this._error.emit({ error: error.error, messgae: error.message, code: error.code, status: error.status });

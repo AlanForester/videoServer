@@ -4,7 +4,6 @@ import { RecordingMode, OpenVidu, Recording,
     SessionProperties, TokenOptions, OpenViduRole,
     } from 'openvidu-node-client';
 import { OPENVIDU_URL, OPENVIDU_SECRET } from '../config';
-import { recSess } from 'src/controllers/RecordingsController';
 
 export class OpenViduService {
 
@@ -57,24 +56,51 @@ export class OpenViduService {
         var properties:SessionProperties = {
             customSessionId: sessionId, 
             recordingMode: RecordingMode.MANUAL,
-            defaultOutputMode: Recording.OutputMode.COMPOSED_QUICK_START
+            defaultOutputMode: Recording.OutputMode.COMPOSED
         };
         return await this.api.createSession(properties);
     }
 
-    public async getSession(sessionId: string): Promise<Session> {
-        const url = '/api/sessions/' + sessionId;
+    public async getSession(sessionId: string,) {
+        const url = '/api/sessions';
         console.log("Requesting session to ", url);
+        const body: string = JSON.stringify({ customSessionId: sessionId});
 
-        return await this.httpClientService.get(url);
+        return await this.httpClientService.post(body, url);
 	}
 
+    // public async getSession(sessionId: string): Promise<Session> {
+    //     const url = '/api/sessions/' + sessionId;
+    //     console.log("Requesting session to ", url);
 
-	public async createToken(session: Session): Promise<string> {
-        console.log("New token to ", session.sessionId);
-        var properties:TokenOptions = {
-            role: OpenViduRole.PUBLISHER, 
-        };
-        return await session.generateToken(properties);
+    //     return await this.httpClientService.get(url);
+	// }
+    public async createToken(session): Promise<any> {
+		const url =  '/api/tokens';
+        console.log("Requesting token to ", session);
+        var body = JSON.stringify({ session: session});
+
+        return await this.httpClientService.post(body, url);
+        //   console.log("New token to ", session.sessionId);
+        // var properties:TokenOptions = {
+        //     role: OpenViduRole.PUBLISHER, 
+        // };
+        // return await session.generateToken(properties);
     }
+
+    // public async createToken(session: Session): Promise<string> {
+    //     console.log("New token to ", session.sessionId);
+    //     var properties:TokenOptions = {
+    //         // role: OpenViduRole.PUBLISHER, 
+    //     };
+    //     return await session.generateToken(properties);
+    // }
+	// public async createToken(sessionId: string): Promise<string> {
+    //     const url = '/api/tokens';
+    //     console.log("Requesting token to ", url);
+    //     const body: string = JSON.stringify({ session: sessionId });
+
+    //     return await this.httpClientService.post(body, url);
+        
+    // }
 }

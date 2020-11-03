@@ -43,9 +43,6 @@ export class TokenService {
 		this.log.d('No external tokens received. Generating token...');
 		await this.generateWebcamToken(this.sessionId, externalConfig?.getOvServerUrl(), externalConfig?.getOvSecret());
 		// TODO: create screenToken only when user initialize the screen
-		if (this.ovSettings?.hasScreenSharing()) {
-			await this.generateScreenToken(this.sessionId, externalConfig?.getOvServerUrl(), externalConfig?.getOvSecret());
-		}
 	}
 
 	getWebcamToken(): string {

@@ -13,9 +13,6 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  plugins: [
-    new Dotenv()
-  ],
   module: {
     rules: [
       {

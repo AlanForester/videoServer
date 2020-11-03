@@ -29,7 +29,7 @@ export class HttpClientService {
 		}
 	}
 
-	public async post(body: string, url: string): Promise<any> {
+	public async post(body, url: string): Promise<any> {
 		if(CALL_OPENVIDU_CERTTYPE === 'selfsigned'){
 			this.options.httpsAgent = new https.Agent({
 				rejectUnauthorized: false

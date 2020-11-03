@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { OpenViduService } from '../services/OpenViduService';
 import { OPENVIDU_URL, OPENVIDU_SECRET } from '../config';
 export const app = express.Router({
-    strict: true
+    strict: false
 });
 
 const openviduService = new OpenViduService();
@@ -15,10 +15,8 @@ app.post('/', async (req: Request, res: Response) => {
 	let sessionId: string = req.body.sessionId;
 	console.log('Session ID received', req.body);
 	try {
-
-		session = await openviduService.createSession(sessionId);		
-		sessionId = session.sessionId;
-
+		const sessionResponse: any = await openviduService.createSession(sessionId);
+		sessionId =sessionResponse.id;
 	} catch (error) {
 		const statusCode = error.response?.status;
 		if (statusCode && statusCode !== 409){
@@ -27,8 +25,8 @@ app.post('/', async (req: Request, res: Response) => {
 		}
 	}
 	try {
-		const response = await openviduService.createToken(session);
-		res.status(200).send(JSON.stringify(response));
+		const response = await openviduService.createToken(sessionId);
+		res.status(200).send(JSON.stringify(response.token));
 	} catch (error) {
 		handleError(error, res);
 	}
@@ -42,7 +40,7 @@ function handleError(error: any, res: Response){
 		res.status(503).send('ECONNREFUSED: Cannot connect with OpenVidu Server');
 		return;
 	}
-	if(error.code === 'DEPTH_ZERO_SELF_SIGNED_CERT' || error.code.includes('SELF_SIGNED_CERT')){
+	if(error.code === 'DEPTH_ZERO_SELF_SIGNED_CERT' || error.code == 'SELF_SIGNED_CERT'){
 		res.status(401).send('ERROR: Self signed certificate Visit '+ OPENVIDU_URL);
 		return;
 	}
