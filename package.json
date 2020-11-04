@@ -53,7 +53,7 @@
     "scripts": {
         "build": "webpack",
         "start": "cross-env CALL_OPENVIDU_CERTTYPE=selfsigned nodemon src/app.ts",
-        "deploy-server": "npm run build --prefix=server && npm run deploy --prefix=server",
+        "deploy-server": "npm run build --prefix=server && npm run deploy --prefix=server && ssh root@jitsi.somedata.online 'service ov-proxy restart'",
         "deploy-client": "npm run build-prod --prefix=client && npm run deploy --prefix=client",
         "test": "jest"
     },

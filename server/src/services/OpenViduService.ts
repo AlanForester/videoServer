@@ -61,7 +61,7 @@ export class OpenViduService {
     //     return await this.api.createSession(properties);
     // }
 
-    public async getSession(sessionId: string,) {
+    public async getSession(sessionId: string) {
         const url = '/api/sessions';
         console.log("Requesting session to ", url);
         const body: string = JSON.stringify({ customSessionId: sessionId});

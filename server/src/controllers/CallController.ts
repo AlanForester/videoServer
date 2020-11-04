@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { OpenViduService } from '../services/OpenViduService';
 import { OPENVIDU_URL, OPENVIDU_SECRET } from '../config';
 export const app = express.Router({
-    strict: false
+    strict: true
 });
 
 const openviduService = new OpenViduService();
@@ -15,7 +15,7 @@ app.post('/', async (req: Request, res: Response) => {
 	let sessionId: string = req.body.sessionId;
 	console.log('Session ID received', req.body);
 	try {
-		const sessionResponse: any = await openviduService.createSession(sessionId);
+		const sessionResponse = await openviduService.createSession(sessionId);
 		sessionId =sessionResponse.id;
 	} catch (error) {
 		const statusCode = error.response?.status;
@@ -24,12 +24,9 @@ app.post('/', async (req: Request, res: Response) => {
 			return;
 		}
 	}
-	try {
-		const response = await openviduService.createToken(sessionId);
-		res.status(200).send(JSON.stringify(response.token));
-	} catch (error) {
-		handleError(error, res);
-	}
+	const response = await openviduService.createToken(sessionId);
+	console.log(response)
+	res.status(200).send(JSON.stringify(response));
 });
 
 function handleError(error: any, res: Response){

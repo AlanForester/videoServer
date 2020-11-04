@@ -1,11 +1,10 @@
-import { Session } from 'openvidu-browser';
 
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { OpenViduService } from '../services/OpenViduService';
 
 export const appHook = express.Router({
-    strict: false
+    strict: true
 });
 
 const openviduService = new OpenViduService();
@@ -14,7 +13,7 @@ var isec = {};
 
 appHook.post('/', async (req: Request, res: Response) => {
 	let body: any = req.body;
-	console.log('HOOK:  ',  body.sessionId, body.event);
+	console.log('HOOK:  ',  body);
 	if (body.event == "participantJoined") {
 		const sessionId = body.sessionId
 		const session: any = await openviduService.getSession(sessionId)
