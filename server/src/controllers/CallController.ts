@@ -16,17 +16,21 @@ app.post('/', async (req: Request, res: Response) => {
 	console.log('Session ID received', req.body);
 	try {
 		const sessionResponse = await openviduService.createSession(sessionId);
+		console.log('Session', req.body);
 		sessionId =sessionResponse.id;
+		const response = await openviduService.createToken(sessionId);
+		console.log(response)
+		res.status(200).send(JSON.stringify(response));
+		return
 	} catch (error) {
 		const statusCode = error.response?.status;
-		if (statusCode && statusCode !== 409){
+		if (statusCode && statusCode !== 409) {
 			handleError(error, res);
 			return;
 		}
 	}
-	const response = await openviduService.createToken(sessionId);
-	console.log(response)
-	res.status(200).send(JSON.stringify(response));
+	handleError(503, res);
+	
 });
 
 function handleError(error: any, res: Response){
